@@ -25,14 +25,26 @@ jobs:
     
     steps:
       - name: precheck 
-        run: echo ${{ env.DISCORD.EMBEDS }}
+        run: |
+          echo ${{ env.DISCORD.EMBEDS }}
+          echo $env.DISCORD.EMBEDS
         
       - name: Discord notification (start ci workflow)
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: ${{ toJson(env.DISCORD_EMBEDS) }}
+#           DISCORD_EMBEDS: ${{ toJson(env.DISCORD_EMBEDS) }}
         uses: Ilshidur/action-discord@master
-        
+        with:
+          args: |
+              [{
+              "title": "[${{ github.event.pull_request.number }}] ${{ github.event.pull_request.title }}",
+              "author": {
+                "name": "${{ github.event.pull_request.user.login }}"
+              },
+              "url": "${{ github.event.pull_request.html_url }}",
+              "color": 15258703,
+              "description": "${{ github.event.pull_request.body }}"
+               }]
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.ACTION_TOKEN }}

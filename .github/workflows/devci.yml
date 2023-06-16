@@ -10,15 +10,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Discord notification(start ci work flow)
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: ${{ toJson(${DISCORD_BODY}) }}
         uses: Ilshidur/action-discord@master
-        with:
-          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been pull request.'
-          
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.ACTION_TOKEN }}

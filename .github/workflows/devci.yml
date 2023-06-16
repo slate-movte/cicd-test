@@ -14,17 +14,19 @@ jobs:
     steps:
       - name: Set Discord Embeds
         run: |
-          echo "::set-env name=DISCORD_EMBEDS::{\"title\": \"[${{ github.event.pull_request.number }}]| ${{ github.event.pull_request.title }}\",|
-          \"author\": {\"name\": \"${{ github.event.pull_request.user.login }}\"},|
-          \"url\": \"${{ github.event.pull_request.html_url }}\",\"color\": 15258703,|
-          \"description\": \"${{ github.event.pull_request.user.body }}\"}"
+          echo '{"DISCORD_EMBEDS": "{\"title\": \"[${{ github.event.pull_request.number }}] ${{ github.event.pull_request.title }}\",\
+          \"author\": {\"name\": \"${{ github.event.pull_request.user.login }}\"},\
+          \"url\": \"${{ github.event.pull_request.html_url }}\",\
+          \"color\": 15258703,\
+          \"description\": \"${{ github.event.pull_request.user.body }}\"}"}' >> $GITHUB_ENV
 
       - name: Discord notification (start ci workflow)
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: ${{ env.DISCORD_EMBEDS }}
-        uses: Ilshidur/action-discord@master
-        
+        run: |
+          echo $DISCORD_EMBEDS > DISCORD_EMBEDS.json
+          Ilshidur/action-discord@master
+
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.ACTION_TOKEN }}
@@ -42,4 +44,6 @@ jobs:
         run: chmod +x gradlew
 
       - name: Project testing
-        run: SPRING_PROFILES_ACTIVE=dev ./gradlew clean build
+        run: |
+          SPRING_PROFILES_ACTIVE=dev \
+          ./gradlew clean build

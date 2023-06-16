@@ -7,26 +7,29 @@ on:
       - 'main'
   workflow_dispatch:
   
+env:
+  DISCORD_EMBEDS: |
+    {
+      "title": "[${{ github.event.pull_request.number }}] ${{ github.event.pull_request.title }}",
+      "author": {
+        "name": "${{ github.event.pull_request.user.login }}"
+      },
+      "url": "${{ github.event.pull_request.html_url }}",
+      "color": 15258703,
+      "description": "${{ github.event.pull_request.body }}"
+    }
+
 jobs:
   build:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Set Discord Embeds
-        run: |
-          echo '{"DISCORD_EMBEDS": "{\"title\": \"[${{ github.event.pull_request.number }}] ${{ github.event.pull_request.title }}\",\
-          \"author\": {\"name\": \"${{ github.event.pull_request.user.login }}\"},\
-          \"url\": \"${{ github.event.pull_request.html_url }}\",\
-          \"color\": 15258703,\
-          \"description\": \"${{ github.event.pull_request.user.body }}\"}"}' >> $GITHUB_ENV
-
       - name: Discord notification (start ci workflow)
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        run: |
-          echo $DISCORD_EMBEDS > DISCORD_EMBEDS.json
-          Ilshidur/action-discord@master
-
+          DISCORD_EMBEDS: ${{ env.DISCORD_EMBEDS }}
+        uses: Ilshidur/action-discord@master
+        
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.ACTION_TOKEN }}

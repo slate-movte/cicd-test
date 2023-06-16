@@ -9,7 +9,7 @@ on:
   
 env:
   DISCORD_EMBEDS: |
-    {
+    [{
       "title": "[${{ github.event.pull_request.number }}] ${{ github.event.pull_request.title }}",
       "author": {
         "name": "${{ github.event.pull_request.user.login }}"
@@ -17,7 +17,7 @@ env:
       "url": "${{ github.event.pull_request.html_url }}",
       "color": 15258703,
       "description": "${{ github.event.pull_request.body }}"
-    }
+    }]
 
 jobs:
   build:

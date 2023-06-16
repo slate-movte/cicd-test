@@ -24,6 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: precheck 
+        run: echo ${{ env.DISCORD.EMBEDS }}
+        
       - name: Discord notification (start ci workflow)
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}

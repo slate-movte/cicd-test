@@ -12,10 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: test and check!
+        run: echo $DISCORD_BODY
+    
       - name: Discord notification(start ci work flow)
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: ${{ toJson(DISCORD_BODY) }}
+#           DISCORD_EMBEDS: ${{ toJson(DISCORD_BODY) }}
         uses: Ilshidur/action-discord@master
       - uses: actions/checkout@v3
         with:

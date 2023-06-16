@@ -29,5 +29,5 @@ jobs:
         run: chmod +x gradlew
 
       - name: project testing
-        run: ./gradlew clean build
+        run: SPRING_PROFILES_ACTIVE=dev ./gradlew clean build
 

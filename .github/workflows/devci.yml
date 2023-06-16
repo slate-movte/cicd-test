@@ -6,12 +6,20 @@ on:
     branches:
       - 'main'
   workflow_dispatch:
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: test and check!
+        run: echo ${{vars.HELLO}}
+
+      - name: Discord notification(start ci work flow)
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        #           DISCORD_EMBEDS: ${{ toJson(DISCORD_BODY) }}
+        uses: Ilshidur/action-discord@master
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.ACTION_TOKEN }}
@@ -19,7 +27,7 @@ jobs:
 
       - name: check out project
         run: ls -al
-        
+
       - uses: actions/setup-java@v3
         with:
           java-version: '17'
@@ -30,4 +38,3 @@ jobs:
 
       - name: project testing
         run: SPRING_PROFILES_ACTIVE=dev ./gradlew clean build
-

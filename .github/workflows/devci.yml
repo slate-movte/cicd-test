@@ -15,7 +15,7 @@ env:
         "name": "${{ github.event.pull_request.user.login }}"
       },
       "url": "${{ github.event.pull_request.html_url }}",
-      "color": ##00ff00,
+      "color": "##00ff00",
       "description": "${{ github.event.pull_request.body }}"
     }]
 

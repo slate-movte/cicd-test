@@ -35,16 +35,7 @@ jobs:
 #           DISCORD_EMBEDS: ${{ toJson(env.DISCORD_EMBEDS) }}
         uses: Ilshidur/action-discord@master
         with:
-          args: |
-              [{
-              "title": "[${{ github.event.pull_request.number }}] ${{ github.event.pull_request.title }}",
-              "author": {
-                "name": "${{ github.event.pull_request.user.login }}"
-              },
-              "url": "${{ github.event.pull_request.html_url }}",
-              "color": 15258703,
-              "description": "${{ github.event.pull_request.body }}"
-               }]
+          args: "${{ github.event.pull_request.html_url }} 링크입니다."
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.ACTION_TOKEN }}

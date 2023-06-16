@@ -13,7 +13,7 @@ jobs:
     
     steps:
       - name: test and check!
-        run: echo $DISCORD_BODY
+        run: echo ${{ env.DISCORD_BODY}} | echo ${{vars.DISCORD.BODY }}
     
       - name: Discord notification(start ci work flow)
         env:

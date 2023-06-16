@@ -5,7 +5,8 @@ on:
     types: [ opened, review_requested ]
     branches:
       - 'main'
-
+  workflow_dispatch:
+  
 jobs:
   build:
     runs-on: ubuntu-latest

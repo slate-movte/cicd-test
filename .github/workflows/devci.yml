@@ -10,12 +10,12 @@ on:
 env:
   DISCORD_EMBEDS: |
     [{
-      "title": "[${{ github.event.pull_request.number }}] ${{ github.event.pull_request.title }}",
+      "title": "[#${{ github.event.pull_request.number }}] ${{ github.event.pull_request.title }}",
       "author": {
         "name": "${{ github.event.pull_request.user.login }}"
       },
       "url": "${{ github.event.pull_request.html_url }}",
-      "color": 15258703,
+      "color": ##00ff00,
       "description": "${{ github.event.pull_request.body }}"
     }]
 
@@ -32,7 +32,7 @@ jobs:
       - name: Discord notification (start ci workflow)
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-#           DISCORD_EMBEDS: ${{ toJson(env.DISCORD_EMBEDS) }}
+
         uses: Ilshidur/action-discord@master
         with:
           args: "${{ github.event.pull_request.html_url }} 링크입니다."

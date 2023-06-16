@@ -2,7 +2,7 @@ name: dev branch ci
 
 on:
   pull_request:
-    types: [ opened, review_requested ]
+    types: [opened, review_requested]
     branches:
       - 'main'
   workflow_dispatch:
@@ -12,18 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-        - name: Set Discord Embeds
-          run: echo '::set-env name=DISCORD_EMBEDS::{
-          "title": "[${{ github.event.pull_request.number }}] ${{ github.event.pull_request.title }}",
-          "author": {
-            "name": "${{ github.event.pull_request.user.login }}"
-          },
-          "url": "${{ github.event.pull_request.html_url }}",
-          "color": 15258703,
-          "description": "${{ github.event.pull_request.user.body }}"
-        }'
+      - name: Set Discord Embeds
+        run: |
+          echo "::set-env name=DISCORD_EMBEDS::{\"title\": \"[${{ github.event.pull_request.number }}]| ${{ github.event.pull_request.title }}\",|
+          \"author\": {\"name\": \"${{ github.event.pull_request.user.login }}\"},|
+          \"url\": \"${{ github.event.pull_request.html_url }}\",\"color\": 15258703,|
+          \"description\": \"${{ github.event.pull_request.user.body }}\"}"
 
-      - name: Discord notification(start ci work flow)
+      - name: Discord notification (start ci workflow)
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: ${{ env.DISCORD_EMBEDS }}
@@ -34,7 +30,7 @@ jobs:
           token: ${{ secrets.ACTION_TOKEN }}
           submodules: true
 
-      - name: check out project
+      - name: Check out project
         run: ls -al
         
       - uses: actions/setup-java@v3
@@ -45,6 +41,5 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: project testing
+      - name: Project testing
         run: SPRING_PROFILES_ACTIVE=dev ./gradlew clean build
-

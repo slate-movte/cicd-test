@@ -62,17 +62,18 @@ jobs:
     name: Deploy
     runs-on: [self-hosted]
     steps:
-      - name: Login to docker registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: qudtjs0753
-          password: ${{secrets.CICD_REGISTRY}}
+      #   - name: Login to docker registry
+      #     uses: docker/login-action@v1
+      #     with:
+      #       registry: ghcr.io
+      #       username: qudtjs0753
+      #       password: ${{secrets.CICD_REGISTRY}}
       - name: Execute
         id: execute
         run: |
-          docker stop ${{env.NAME}} && docker rm ${{env.NAME}} && docker rmi ${{env.DOCKER_IMAGE}}:latest
-            docker run -d -p 8080:8080 --name ${{env.NAME}} ${{env.DOCKER_IMAGE}}:latest
+          docker ps
+        #   docker stop ${{env.NAME}} && docker rm ${{env.NAME}} && docker rmi ${{env.DOCKER_IMAGE}}:latest
+        #     docker run -d -p 8080:8080 --name ${{env.NAME}} ${{env.DOCKER_IMAGE}}:latest
 
     #   - name: send result when success
     #     needs:

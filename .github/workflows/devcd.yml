@@ -83,17 +83,17 @@ jobs:
         if: ${{success() && steps.execute.conclusion=='success'}}
         uses: ./.github/actions/discord_action
         with:
-          title: "title 성공"
+          title: "${{github.repository}}\b배포결과"
           author: ${{github.actor}}
           webhookurl: ${{ secrets.DISCORD_WEBHOOK }}
           color: 65280
-          description: "정상적으로 배포되었습니다"
+          description: "정상적으로\b배포되었습니다"
       - name: send result when failure
         if: ${{ failure() && steps.execute.conclusion=='failure'}}
         uses: ./.github/actions/discord_action
         with:
-          title: "title 실패"
+          title: "${{github.repository}}\b배포결과"
           author: ${{github.actor}}
           webhookurl: ${{ secrets.DISCORD_WEBHOOK }}
           color: 14177041
-          description: "배포 실패"
+          description: "배포\b실패"

@@ -5,6 +5,9 @@ inputs:
     required: false
     default: 'failure'
 
+  webhookurl:
+    required: true
+
   title:
     required: true
 
@@ -46,7 +49,7 @@ runs:
         EOF
         }
 
-        TARGET=${{ secrets.DISCORD_WEBHOOK }}
+        TARGET=${{inputs.webhookurl}}
         TITLE=${{inputs.title}}
         NAME=${{inputs.author}}
         COLOR=${{inputs.color}}

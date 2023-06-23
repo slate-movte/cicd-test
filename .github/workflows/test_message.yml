@@ -9,9 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.ACTION_TOKEN }}
+          submodules: true
       - uses: ./.github/actions
         with:
           title: "hh"
           color: 65280
           author: "author"
           description: "안녕하세요"
+          webhookurl: ${{secrets.DISCORD_WEBHOOK}}

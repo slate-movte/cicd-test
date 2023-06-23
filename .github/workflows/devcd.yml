@@ -81,7 +81,7 @@
 #          sh healthcheck.sh
 #      - name: send result when success
 #        if: ${{success() && steps.execute.conclusion=='success'}}
-#        uses: Ilshidur/action-discord@master
+#        uses: ./.
 #        with:
 #          args: "배포 성공입니다"
 #      - name: send result when failure

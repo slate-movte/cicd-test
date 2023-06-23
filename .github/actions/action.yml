@@ -48,7 +48,6 @@ runs:
         EOF
         }
 
-        TARGET=${{inputs.webhookurl}}
         TITLE=${{inputs.title}}
         NAME=${{inputs.author}}
         COLOR=${{inputs.color}}
@@ -57,4 +56,4 @@ runs:
         value=$(generate_post_data $TITLE $NAME $COLOR $DESC)
         echo $value
         
-        curl -X POST -H "Content-Type: application/json" —data "$(generate_post_data $TITLE $NAME $COLOR $DESC)" $TARGET
+        curl -X POST -H "Content-Type: application/json" —data "$(generate_post_data $TITLE $NAME $COLOR $DESC)" ${{inputs.webhookurl}}

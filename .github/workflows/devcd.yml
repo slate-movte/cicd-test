@@ -71,7 +71,7 @@ jobs:
       - name: Execute
         id: execute
         run: |
-          docker ps
+          echo $USER
         #   docker stop ${{env.NAME}} && docker rm ${{env.NAME}} && docker rmi ${{env.DOCKER_IMAGE}}:latest
         #     docker run -d -p 8080:8080 --name ${{env.NAME}} ${{env.DOCKER_IMAGE}}:latest
 

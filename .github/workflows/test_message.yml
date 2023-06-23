@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ../actions/discord_noti
+      - uses: ./.github/actions/discord_noti
         with:
           title: "hh"
           color: 65280

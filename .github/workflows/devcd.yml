@@ -2,7 +2,7 @@ name: dev server deploy
 
 on:
   push:
-    branchs: ["develop"]
+    branches: ["main", "develop"]
 
   workflow_dispatch:
 

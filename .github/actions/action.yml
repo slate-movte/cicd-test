@@ -1,4 +1,4 @@
-name: 'discord-noti'
+name: 'action'
 
 inputs:
   status:

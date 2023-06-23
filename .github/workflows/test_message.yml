@@ -12,7 +12,7 @@ jobs:
         with:
           token: ${{ secrets.ACTION_TOKEN }}
           submodules: true
-      - uses: ./.github/actions/discord_noti.yml
+      - uses: ./.github/actions
         with:
           title: "hh"
           color: 65280

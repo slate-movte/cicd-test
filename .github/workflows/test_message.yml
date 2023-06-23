@@ -1,14 +1,12 @@
-name: dev server deploy
+name: message test
 
 on:
   push:
-    branches: ["main", "develop"]
-
+    branches: ["main"]
   workflow_dispatch:
 jobs:
   build-push:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
         with:

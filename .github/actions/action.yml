@@ -40,7 +40,6 @@ runs:
               "author": {
                 "name": "$2"
               },
-              "url": "https://google.com/",
               "color": "$3",
               "description": "$4"
             }

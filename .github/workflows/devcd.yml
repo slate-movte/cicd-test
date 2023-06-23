@@ -81,7 +81,7 @@ jobs:
           sh healthcheck.sh
       - name: send result when success
         if: ${{success() && steps.execute.conclusion=='success'}}
-        uses: ./.github/discord_action
+        uses: ./.github/actions/discord_action
         with:
           title: "title 성공"
           author: ${{github.author}}
@@ -90,7 +90,7 @@ jobs:
           description: "정상적으로 배포되었습니다"
       - name: send result when failure
         if: ${{ failure() && steps.execute.conclusion=='failure'}}
-        uses: ./.github/discord_action
+        uses: ./.github/actions/discord_action
         with:
           title: "title 실패"
           author: ${{github.author}}

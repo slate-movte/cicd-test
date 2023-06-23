@@ -75,7 +75,6 @@ jobs:
             docker run -d -p 8080:8080 --name ${{env.NAME}} ${{env.DOCKER_IMAGE}}:latest
 
       - name: send result when success
-        needs:
         if: ${{success() && steps.execute.conclusion=='success'}}
         uses: Ilshidur/action-discord@master
         with:

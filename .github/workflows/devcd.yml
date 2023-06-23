@@ -19,6 +19,18 @@ jobs:
         with:
           token: ${{ secrets.ACTION_TOKEN }}
           submodules: true
+      - uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "zulu"
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Project testing
+        run: |
+          SPRING_PROFILES_ACTIVE=dev \
+          ./gradlew clean build
       - name: Set Up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1

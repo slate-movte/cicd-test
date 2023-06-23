@@ -84,7 +84,7 @@ jobs:
         uses: ./.github/actions/discord_action
         with:
           title: "title 성공"
-          author: ${{github.author}}
+          author: ${{github.actor}}
           webhookurl: ${{ secrets.DISCORD_WEBHOOK }}
           color: 65280
           description: "정상적으로 배포되었습니다"
@@ -93,7 +93,7 @@ jobs:
         uses: ./.github/actions/discord_action
         with:
           title: "title 실패"
-          author: ${{github.author}}
+          author: ${{github.actor}}
           webhookurl: ${{ secrets.DISCORD_WEBHOOK }}
           color: 14177041
           description: "배포 실패"

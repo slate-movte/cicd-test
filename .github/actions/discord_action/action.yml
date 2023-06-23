@@ -48,10 +48,10 @@ runs:
         EOF
         }
 
-        TITLE=${{inputs.title}}
-        NAME=${{inputs.author}}
-        COLOR=${{inputs.color}}
-        DESC=${{inputs.description}}
+        TITLE="${{inputs.title}}"
+        NAME="${{inputs.author}}"
+        COLOR="${{inputs.color}}"
+        DESC="${{inputs.description}}"
         
         value=$(generate_post_data $TITLE $NAME $COLOR $DESC)
         echo $value

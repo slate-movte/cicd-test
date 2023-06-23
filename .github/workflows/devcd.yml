@@ -62,27 +62,26 @@ jobs:
     name: Deploy
     runs-on: [self-hosted, cicd-test]
     steps:
-      #   - name: Login to docker registry
-      #     uses: docker/login-action@v1
-      #     with:
-      #       registry: ghcr.io
-      #       username: qudtjs0753
-      #       password: ${{secrets.CICD_REGISTRY}}
+      - name: Login to docker registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: qudtjs0753
+          password: ${{secrets.CICD_REGISTRY}}
       - name: Execute
         id: execute
         run: |
-          docker ps
-        #   docker stop ${{env.NAME}} && docker rm ${{env.NAME}} && docker rmi ${{env.DOCKER_IMAGE}}:latest
-        #     docker run -d -p 8080:8080 --name ${{env.NAME}} ${{env.DOCKER_IMAGE}}:latest
+          docker stop ${{env.NAME}} && docker rm ${{env.NAME}} && docker rmi ${{env.DOCKER_IMAGE}}:latest
+            docker run -d -p 8080:8080 --name ${{env.NAME}} ${{env.DOCKER_IMAGE}}:latest
 
-    #   - name: send result when success
-    #     needs:
-    #     if: ${{success() && steps.execute.conclusion=='success'}}
-    #     uses: Ilshidur/action-discord@master
-    #     with:
-    #       args: "배포 성공입니다"
-    #   - name: send result when failure
-    #     if: ${{ failure() && steps.execute.conclusion=='failure'}}
-    #     uses: Ilshidur/action-discord@master
-    #     with:
-    #       args: "배포 실패입니다."
+      - name: send result when success
+        needs:
+        if: ${{success() && steps.execute.conclusion=='success'}}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: "배포 성공입니다"
+      - name: send result when failure
+        if: ${{ failure() && steps.execute.conclusion=='failure'}}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: "배포 실패입니다."

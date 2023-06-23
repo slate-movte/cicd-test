@@ -60,7 +60,7 @@ jobs:
   deploy:
     needs: build-push
     name: Deploy
-    runs-on: [self-hosted, cicd]
+    runs-on: [self-hosted, cicd-test]
     steps:
       #   - name: Login to docker registry
       #     uses: docker/login-action@v1

@@ -7,27 +7,11 @@ on:
       - "main"
   workflow_dispatch:
 
-env:
-  DISCORD_EMBEDS: |
-    [{
-      "title": "[#${{ github.event.pull_request.number }}] ${{ github.event.pull_request.title }}",
-      "author": {
-        "name": "${{ github.event.pull_request.user.login }}"
-      },
-      "url": "${{ github.event.pull_request.html_url }}",
-      "color": 65280,
-      "description": "${{ github.event.pull_request.body }}"
-    }]
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: precheck
-        run: |
-          echo ${{ env.DISCORD.EMBEDS }}
-          echo $env.DISCORD.EMBEDS
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.ACTION_TOKEN }}
